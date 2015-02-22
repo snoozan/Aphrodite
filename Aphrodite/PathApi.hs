@@ -19,23 +19,17 @@ import qualified Maps as M
 
 
 directionsUrl :: String -> String -> IO C.ByteString
-directionsUrl orig dest = "https://www.google.com/maps/embed/v1/directions"
-			++ "?key=" ++ googleAPIKey
-			++ "&origin=" ++ urlEncode orig
+directionsUrl orig dest = "https://maps.googleapis.com/maps/api/directions/json?"
+			++ "Directions"
+			++ "&key=" ++ googleAPIKey
+			++ "origin=" ++ urlEncode orig
 			++ "&destination=" ++ urlEncode dest
-			++ "&mode=transit"		--makes default mode of transportation 'transit'
--- | Takes in a JSON blob and returns the URL for the embeded map
---getRoute :: IO C.ByteString -> String
-	--  .
-	--  .
-	--  .
-	--  directionsUrl origCoor destCoor
--- <iframe
---   width="450"
---   height="250"
---   frameborder="0" style="border:0"
---   src="https://www.google.com/maps/embed/v1/search?key=API_KEY&q;=record+stores+in+Seattle">
--- </iframe>    
--- ^^^
--- This is the style that Sarah will be dealing with. SO all we need to do as far as directions goes is sending her back this string to do whatever she wants with. <<< Delete when finished. 
+			++ "&mode=transit"			--makes default mode of transportation 'transit'
+
+-- | only returns a single route
+getRoute :: M.Geolocloc -> M.Geolocloc -> IO C.ByteString
+getRoute orig dest = (orig lat1 lng1) (dest lat2 lng2)
+		res <- simpleHttp $ directionsURL geoStr1 geoStr2
+		where geoStr1 = show lat1 ++ "," ++ show lng1
+		      geoStr2 = show lat2 ++ "," ++ show lng2
 
