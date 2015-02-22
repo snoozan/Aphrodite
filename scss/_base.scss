@@ -1,5 +1,7 @@
 html {
   box-sizing: border-box;
+  min-height: 100%;
+  min-width: 100%;
 }
 
 *, *:before, *:after {
@@ -8,4 +10,39 @@ html {
 
 body {
   font-family: 'Open Sans', sans-serif;
+  color: #555;
+}
+.home {
+  background-image: url('img/ocean.jpg');
+  background-size: cover;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+h1, h2, h3 {
+  font-weight: 300;
+}
+
+h1 {
+  font-size: rem(50);
+}
+
+h2 {
+  font-size: rem(20);
+}
+
+.container {
+  @include outer-container;
+}
+
+.center {
+  text-align: center;
+}
+
+.main-title {
+  margin-top: rem(100);
+}
+
+.light-text {
+  color: #FFF;
 }

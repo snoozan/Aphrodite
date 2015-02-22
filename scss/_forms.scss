@@ -1,0 +1,68 @@
+input, form, textarea, button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.splash-form {
+  @include span-columns(12);
+  text-align: center;
+  margin-top: rem(50);
+  input[type="text"], button[type="submit"] {
+    margin-bottom: rem(10);
+    margin-top: rem(10);
+    margin-right: 0;
+    margin-left: 0;
+    height: rem(45);
+    font-weight: 100;
+  }
+  input[type="text"] {
+    box-shadow: 0 0 4px darken(#FFF, 20%);
+    color: lighten(#000, 40%);
+    &::-webkit-input-placeholder {
+      color: lighten(#000, 40%);
+    }
+  }
+  .location-box {
+    padding-left: rem(43);
+  }
+  button[type="submit"] {
+    width: rem(50);
+    border: none;
+  }
+}
+
+.input-wrap {
+  position: relative;
+  display: inline;
+}
+
+input[type="text"] {
+  border-radius: rem(4);
+  border: none;
+  padding: rem(10);
+  width: 60%;
+}
+
+
+button[type="submit"] {
+  background-color: $peach;
+  border-radius: rem(4);
+  padding: rem(10);
+  color: #FFF;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.gps-icon {
+  width: rem(22);
+  height: rem(22);
+  position: absolute;
+  top: 0px;
+  left: 12px;
+  opacity: .4;
+}

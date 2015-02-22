@@ -5,8 +5,24 @@
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
   <link href="style.css" rel="stylesheet">
 </head>
-<body>
-  <h1>Aphrodite</h1>
+<body class="home">
+  <div class="container center">
+    <h1 class="main-title">Aphrodite</h1>
+
+    <form class="splash-form" action="index.html" method="POST">
+      <div class="input-wrap">
+        <input class="location-box" type="text" placeholder="Search by Location">
+        <a href="#"><img class="gps-icon" src="img/location2.svg"></a>
+      </div>
+      <button type="submit">Go</button><br>
+
+      <h2>OR</h2>
+
+      <input type="text" placeholder="Search by Keyword">
+      <button type="submit">Go</button>
+    </form>
+  </div><!--end container-->
+
   <script src="js/script.js"></script>
 </body>
 </html>
