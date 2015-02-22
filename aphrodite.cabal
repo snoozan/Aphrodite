@@ -27,3 +27,7 @@ executable aphrodite
                      , wai-middleware-static
                      , wai-extra
                      , time
+                     , HTTP
+                     , regex-compat
+                     , json
+                     , http-conduit
