@@ -15,25 +15,11 @@ import Network.HTTP.Base
 import Text.Regex
 import Text.JSON.Generic
 import Network.HTTP.Conduit
+import Control.Monad.IO.Class
+import qualified Maps as M
+import qualified Places as P
 
 --import Api
-
-data Geolocloc = Geolocloc
-    { lat :: Double
-    , lng :: Double
-    } deriving(Show,Data,Typeable)
-
-data Geolocgeometry = Geolocgeometry
-    { location :: Geolocloc
-    } deriving(Show,Data,Typeable)
-
-data Geolocjson = Geolocjson
-    { geometry :: Geolocgeometry
-    } deriving(Show,Data,Typeable)
-
-data Geolocresult = Geolocresult
-    { results :: [Geolocjson]
-    } deriving(Show,Data,Typeable)
 
 googleApiKey :: String
 googleApiKey = "AIzaSyDxQZG6uDB3BWSXmMGdmto8mJqN-P5Zg-Q"
@@ -61,19 +47,43 @@ getNearbyClinics loc =
         Just [slat,slong] -> simpleHttp $ nearbyUrl $ slat ++ "," ++ slong
         Nothing           -> do res <- simpleHttp $ getLocation loc
                                 let geoloc = decodeJSON $ C.unpack res
-                                    Geolocresult jsn = geoloc
-                                    Geolocjson (Geolocgeometry (Geolocloc lat lng)) = head jsn
+                                    M.Geolocresult jsn = geoloc
+                                    M.Geolocjson (M.Geolocgeometry (M.Geolocloc lat lng)) = head jsn
                                 simpleHttp $ nearbyUrl $ show lat ++ "," ++ show lng
+placeUrl :: String -> String
+placeUrl place = "https://maps.googleapis.com/maps/api/place/details/json?"
+                ++ "placeid=" ++ urlEncode place
+                ++ "&key;=" ++ urlEncode googleApiKey 
+
+getClinicInfo :: String -> IO C.ByteString
+getClinicInfo placeid = do result <- simpleHttp $ placeUrl placeid    
+                           --let placeinfo = decodeJSON $ C.unpack result
+                           --    P.PlacesResult (dets:_) = placeinfo
+                           --    P.PlaceDetails
+                           --        { opening_hours = PlaceHours open pers
+                           --        , formatted_address = addr
+                           --        , formatted_phone_number = numb
+                           --        , permanently_closed = clsd
+                           --        } = dets
+                           --    days = encodeJSON pers
+                           return result
+    
 
 -- Main loop
 mainloop :: IO()
 mainloop = scotty 3000 $ do
         middleware $ staticPolicy (noDots >-> addBase "static")
         get "/" $ file "static/index.html" 
-        get "/clinics" $ undefined
+        post "/clinics" $ do
+           location <- param "location"             
+           clinics <- liftIO $ getNearbyClinics location
+           raw clinics
+        post "/getDetails" $ do
+           placeid <- param "placeid"
+           clinicDetails <- liftIO $ getClinicInfo placeid
+           raw clinicDetails
+
             
---       get "/clinics" $
---           param "location" >>= getLoc >>= getClinics   
 --       get "/map" $
 --           param "clinic" >>= displayRoute 
 
