@@ -21,11 +21,11 @@
     },
     "getData": function(params) {   // AJAX our API to get the data
       var request = new XMLHttpRequest();
-      var url = "";
+      var url = "localhost:3000/clinics";
 
       request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
-            var data = JSON.parse(xmlhttp.responseText);
+            var data = JSON.parse(request.responseText);
         }
         // else if (request.status == 00) {
           // add error handling later you lazy mofo
