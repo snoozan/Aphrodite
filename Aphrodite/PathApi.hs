@@ -20,10 +20,11 @@ import qualified Maps as M
 
 directionsUrl :: String -> String -> IO C.ByteString
 directionsUrl orig dest = "https://maps.googleapis.com/maps/api/directions/json?"
+			++ "Directions"
+			++ "&key=" ++ googleAPIKey
 			++ "origin=" ++ urlEncode orig
 			++ "&destination=" ++ urlEncode dest
 			++ "&mode=transit"			--makes default mode of transportation 'transit'
-			++ "&key=" ++ googleAPIKey
 
 -- | only returns a single route
 getRoute :: M.Geolocloc -> M.Geolocloc -> IO C.ByteString
