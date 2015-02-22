@@ -13,3 +13,6 @@ See [LICENSE](https://github.com/emollient/Aphrodite/blob/master/LICENSE) file.
 
 ## Authors
 Aphrodite was created by Susan Lunn, Sarah Federman, and Madison Flaherty.
+
+## Slides
+[Slideshow](http://www.csh.rit.edu/~slunn/wichacks/#/)
