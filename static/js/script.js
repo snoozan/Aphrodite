@@ -21,7 +21,7 @@
     },
     "getData": function(params) {   // AJAX our API to get the data
       var request = new XMLHttpRequest();
-      var url = "";
+      var url = "Aphrodite/clinics?location=" + params;
 
       request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {

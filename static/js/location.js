@@ -1,7 +1,7 @@
 var locationForm = function(input, trigger) {
   trigger.addEventListener("click", function() {
    navigator.geolocation.getCurrentPosition(function(position) {
-     var str = position.coords.latitude.toString() + ", " + position.coords.longitude.toString();
+     var str = position.coords.latitude.toString() + " " + position.coords.longitude.toString();
      input.value = str;
      console.log(position);
    });
