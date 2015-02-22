@@ -78,16 +78,16 @@ mainloop = scotty 3000 $ do
            location <- param "location"             
            clinics <- liftIO $ getNearbyClinics location
            raw clinics
-        post "/getDetails" $ do
+        get "/getDetails" $ do
            placeid <- param "placeid"
            clinicDetails <- liftIO $ getClinicInfo placeid
            raw clinicDetails
-
             
 --       get "/map" $
 --           param "clinic" >>= displayRoute 
 
 -- Entry Point
-main :: IO()
+main :: IO() -> IO String
 main = do 
-    mainloop
+       mainloop
+
