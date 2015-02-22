@@ -7,84 +7,42 @@
 </head>
 <body class="results">
   <nav class="top-bar">
-    <a href="index.html">Back</a>
+    <a class="left" href="index.html"><img class="back-arrow" src="img/arrow-left.svg">Back</a>
+    <span class="top-bar__title">Aphrodite</span>
   </nav>
   <div class="container">
-    <h2>Search Results</h2>
 
-    <article class="card planned-p">
-      <h3 class="card__title">Planned Parenthood</h3>
-      <div class="card__status"><span class="open">Open</span><br>5 miles</div>
-      <hr>
-      <div class="card__content">
-        <h4 class="card__content__title">Address</h4>
-        <p>129 Clovercrest Dr.<br>Rochester, NY 14618</p>
-      </div>
-      <div class="card__content">
-        <h4 class="card__content__title">Hours</h4>
-        <ul>
-          <li>Mon: 8am - 4pm</li>
-          <li>Tues: 8am - 4pm</li>
-        </ul>
-      </div>
-      <div class="card__expanded">
-        <aside class="card__bottom-bar">
-          <a class="card__button"><img src=""></a>
-          <a class="card__button"><img src=""></a>
-          <a class="card__button"><img src=""></a>
-        </aside>
-      </div>
-    </article>
+  </div>
+  <script id="entry-template" type="text/x-handlebars-template">
+      <h2>Search Results</h2>
 
-    <article class="card hospital">
-      <h3 class="card__title">Genesee Hospital</h3>
-      <div class="card__status"><span class="closed">Closed</span><br>3 miles</div>
-      <hr>
-      <div class="card__content">
-        <h4 class="card__content__title">Address</h4>
-        <p>129 Clovercrest Dr.<br>Rochester, NY 14618</p>
-      </div>
-      <div class="card__content">
-        <h4 class="card__content__title">Hours</h4>
-        <ul>
-          <li>Mon: 8am - 4pm</li>
-          <li>Tues: 8am - 4pm</li>
-        </ul>
-      </div>
-      <div class="card__expanded">
-        <aside class="card__bottom-bar">
-          <a class="card__button"><img src=""></a>
-          <a class="card__button"><img src=""></a>
-          <a class="card__button"><img src=""></a>
-        </aside>
-      </div>
-    </article>
+      <article class="card planned-p">
+        <h3 class="card__title">Planned Parenthood</h3>
+        <div class="card__status"><span class="open">Open</span><br>5 miles</div>
+        <hr>
+        <div class="card__content">
+          <h4 class="card__content__title">Address</h4>
+          <p>129 Clovercrest Dr.<br>Rochester, NY 14618</p>
+        </div>
+        <div class="card__content">
+          <h4 class="card__content__title">Hours</h4>
+          <ul>
+            <li>Mon: 8am - 4pm</li>
+            <li>Tues: 8am - 4pm</li>
+          </ul>
+        </div>
+        <div class="card__expanded">
+          <aside class="card__bottom-bar">
+            <a class="card__button"><img src=""></a>
+            <a class="card__button"><img src=""></a>
+            <a class="card__button"><img src=""></a>
+          </aside>
+        </div>
+      </article>
 
-    <article class="card planned-p">
-      <h3 class="card__title">Planned Parenthood</h3>
-      <div class="card__status"><span class="open">Open</span><br>5 miles</div>
-      <hr>
-      <div class="card__content">
-        <h4 class="card__content__title">Address</h4>
-        <p>129 Clovercrest Dr.<br>Rochester, NY 14618</p>
-      </div>
-      <div class="card__content">
-        <h4 class="card__content__title">Hours</h4>
-        <ul>
-          <li>Mon: 8am - 4pm</li>
-          <li>Tues: 8am - 4pm</li>
-        </ul>
-      </div>
-      <div class="card__expanded">
-        <aside class="card__bottom-bar">
-          <a class="card__button"><img src=""></a>
-          <a class="card__button"><img src=""></a>
-          <a class="card__button"><img src=""></a>
-        </aside>
-      </div>
-    </article>
-  </div><!--end container-->
+  </script><!--end template-->
 
+  <script src="js/handlebars.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

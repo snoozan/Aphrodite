@@ -9,6 +9,7 @@
   box-shadow: 0 1px 3px rgba(0,0,0, .3);
   position: relative;
   background-color: #FFF;
+  cursor: pointer;
   hr {
     display: block;
     width: 100%;
@@ -20,10 +21,22 @@
     background-color: #FFF;
   }
   &__title {
-    @include span-columns(8);
+    @include span-columns(9);
     margin: 0;
     margin-top: rem(6);
     font-size: rem(18);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+    &:before {
+      content: '+ ';
+      font-size: rem(22);
+      position: relative;
+      float: left;
+      top: -4px;
+      margin-right: 5px;
+    }
   }
   &__content {
     float: left;
@@ -46,8 +59,7 @@
     }
     &:nth-of-type(3) {
       width: auto;
-      float: right;
-      margin-right: 2%;
+      margin-left: rem(20);
     }
   }
   &__status {
@@ -74,6 +86,13 @@
   }
   &__expanded {
     display: none;
+  }
+  @media screen and (min-width: 700px) {
+    width: 48%;
+    float: left;
+    &:first-of-type {
+      margin-right: 4%;
+    }
   }
 }
 

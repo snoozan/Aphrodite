@@ -18,6 +18,9 @@ body {
   background-size: cover;
   background-position: left bottom;
   background-repeat: no-repeat;
+  .container {
+    margin-top: rem(150);
+  }
 }
 
 .results {
@@ -45,7 +48,7 @@ a {
 
 .container {
   @include outer-container;
-  width: 85%;
+  width: 90%;
 }
 
 .center {
@@ -62,4 +65,14 @@ a {
 
 .closed {
   color: $pink;
+}
+
+.intro {
+  font-style: italic;
+  font-size: rem(16);
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: rem(160);
+  line-height: 1.8;
 }
