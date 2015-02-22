@@ -20,7 +20,7 @@ import qualified Places as P
 --import Api
 
 googleApiKey :: String
-googleApiKey = "AIzaSyDxQZG6uDB3BWSXmMGdmto8mJqN-P5Zg-Q"
+googleApiKey = ""
 
 nearbyUrl :: String -> String
 nearbyUrl location = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
