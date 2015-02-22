@@ -10,7 +10,7 @@ input, form, textarea, button {
 .splash-form {
   @include span-columns(12);
   text-align: center;
-  margin-top: rem(50);
+  margin-top: rem(30);
   input[type="text"], button[type="submit"] {
     margin-bottom: rem(10);
     margin-top: rem(10);
@@ -20,8 +20,9 @@ input, form, textarea, button {
     font-weight: 100;
   }
   input[type="text"] {
-    box-shadow: 0 0 4px darken(#FFF, 20%);
     color: lighten(#000, 40%);
+    background-color: rgba(255,255,255,.5);
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
     &::-webkit-input-placeholder {
       color: lighten(#000, 40%);
     }
@@ -38,6 +39,7 @@ input, form, textarea, button {
 .input-wrap {
   position: relative;
   display: inline;
+  width: 100%;
 }
 
 input[type="text"] {
@@ -50,7 +52,7 @@ input[type="text"] {
 
 button[type="submit"] {
   background-color: $peach;
-  border-radius: rem(4);
+  border-radius: rem(3);
   padding: rem(10);
   color: #FFF;
   border: none;

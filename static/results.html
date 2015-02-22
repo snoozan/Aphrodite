@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results | Aphrodite</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body class="results">
+  <nav class="top-bar">
+    <a class="left" href="index.html"><img class="back-arrow" src="img/arrow-left.svg">Back</a>
+    <span class="top-bar__title">Aphrodite</span>
+  </nav>
+  <div class="container">
+
+  </div>
+  <script id="entry-template" type="text/x-handlebars-template">
+    <div>
+      <h1>Search Results: <span class="query">{{query}}</span></h1>
+      <ul class="view-nav">
+        <li><img src="img/grid.svg"></li>
+        <li><img src="img/map.svg"></li>
+      </ul>
+    </div>
+      {{#each results}}
+      <article class="card planned-p">
+        <h3 class="card__title">{{name}}</h3>
+        <div class="card__status">
+          {{#if opening_hours.open_now}}
+            <span class="open">Open</span>
+            {{else}}
+              <span class="closed">Closed</span>
+          {{/if}}
+        </div>
+        <hr>
+        <div class="card__content first">
+          <p>129 Clovercrest Dr.<br>Rochester, NY 14618</p>
+        </div>
+        <div class="card__content">
+          <ul>
+            <li>Mon: 8am - 4pm</li>
+            <li>Tues: 8am - 4pm</li>
+          </ul>
+        </div>
+        <div class="bar">
+          <ul>
+            <li><a href="tel:142342"><img src="img/tel.svg"></a></li>
+            <li><a href="effthis.com"><img src="img/globe.svg"></a></li>
+            <li><a href="mailto:eff@eff.com"><img src="img/mail.svg"></a></li>
+            <li><a href="navigate.html"><img src="img/location.svg"></a></li>
+          </ul>
+        </div>
+      </article>
+      {{/each}}
+  </script><!--end template-->
+
+  <script src="js/handlebars.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -8,9 +8,6 @@ import Control.Monad.IO.Class(liftIO)
 import qualified Data.ByteString.Lazy.Char8 as C
 import qualified Data.Text.Lazy as T
 import Network.HTTP.Types.Status(forbidden403, notFound404)
-import Network.Wai.Middleware.Static
-import System.Environment(getArgs)
-import Web.Scotty
 import Network.HTTP.Base
 import Text.Regex
 import Text.JSON.Generic
@@ -36,10 +33,6 @@ getLocation loc = "https://maps.googleapis.com/maps/api/geocode/json?"
                 ++ "address=" ++ urlEncode loc
                 ++ "&key" ++ googleApiKey
 
-directionsUrl :: String -> String -> String
-directionsUrl orig dest = "https://maps.googleapis.com/maps/api/directions/json?"
-                       ++ "origin=" ++ urlEncode orig
-                       ++ "&destination=" ++ urlEncode dest
 
 getNearbyClinics :: String -> IO C.ByteString
 getNearbyClinics loc =

@@ -1,0 +1,1 @@
+!function(){window.addEventListener("DOMContentLoaded",function(){var e=document.querySelector("#entry-template").innerHTML,n=Handlebars.compile(e),t=n(data)})}();
