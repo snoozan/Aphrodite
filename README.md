@@ -9,7 +9,7 @@ A Haskell web app that helps women finds verified local planned parenthoods in t
 Aphrodite hopes to help women in need of medical care, no matter what, find safe and verified health and wellness locations in their area.
 
 ## License
-See (LICENSE)[https://github.com/emollient/Aphrodite/blob/master/LICENSE] file.
+See [LICENSE](https://github.com/emollient/Aphrodite/blob/master/LICENSE) file.
 
 ## Authors
 Aphrodite was created by Susan Lunn, Sarah Federman, and Madison Flaherty.
