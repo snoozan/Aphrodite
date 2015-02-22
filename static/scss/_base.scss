@@ -16,7 +16,7 @@ body {
 .home {
   background-image: url('img/ocean.jpg');
   background-size: cover;
-  background-position: left bottom;
+  background-position: top bottom;
   background-repeat: no-repeat;
   .container {
     margin-top: rem(150);
@@ -27,6 +27,15 @@ body {
   background-color: darken(#FFF, 4%);
   .container {
     margin-top: rem(80);
+    @media screen and (min-width: 700px) {
+      margin-top: rem(100);
+    }
+  }
+  h1 {
+    margin-bottom: rem(20);
+    font-size: rem(22);
+    display: inline-block;
+    width: 70%;
   }
 }
 
@@ -44,11 +53,14 @@ h2 {
 
 a {
   text-decoration: none;
+  color: #999;
+  cursor: pointer;
 }
 
 .container {
   @include outer-container;
   width: 90%;
+  max-width: 990px;
 }
 
 .center {
@@ -60,7 +72,7 @@ a {
 }
 
 .open {
-  color: darken($green, 10%);
+  color: darken($teal-light, 10%);
 }
 
 .closed {
@@ -69,10 +81,14 @@ a {
 
 .intro {
   font-style: italic;
-  font-size: rem(16);
+  font-size: rem(22);
   width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: rem(700);
+  font-weight: 100;
   margin-top: rem(160);
   line-height: 1.8;
+  position: fixed;
+  bottom: rem(60);
+  left: 50%;
+  transform: translateX(-50%);
 }

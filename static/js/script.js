@@ -173,7 +173,7 @@
 
   // Document ready
   window.addEventListener("DOMContentLoaded", function() {
-    // attach DOM nodes
+    // attach templating DOM nodes
     resultsLoader.container = document.querySelector(".container");
     resultsLoader.template = document.querySelector("#entry-template").innerHTML;
     // init the templating
