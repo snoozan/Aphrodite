@@ -48,7 +48,7 @@ a {
 
 .container {
   @include outer-container;
-  width: 85%;
+  width: 90%;
 }
 
 .center {
@@ -70,9 +70,9 @@ a {
 .intro {
   font-style: italic;
   font-size: rem(16);
-  width: 80%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   margin-top: rem(160);
-  line-height: 1.6;
+  line-height: 1.8;
 }
