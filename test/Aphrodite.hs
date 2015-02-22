@@ -76,8 +76,11 @@ mainloop = scotty 3000 $ do
            clinicDetails <- liftIO $ getClinicInfo placeid
            raw clinicDetails
 
+            
+--       get "/map" $
+--           param "clinic" >>= displayRoute 
+
 -- Entry Point
 main :: IO()
 main = do 
     mainloop
-

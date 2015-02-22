@@ -12,6 +12,4 @@ Aphrodite hopes to help women in need of medical care, no matter what, find safe
 See [LICENSE](https://github.com/emollient/Aphrodite/blob/master/LICENSE) file.
 
 ## Authors
-Aphrodite was created by [Susan Lunn](https://github.com/emollient/), [Sarah Federman](https://github.com/sarahbethfederman), and [Madison Flaherty](https://github.com/madisonflaherty).
-
-
+Aphrodite was created by Susan Lunn, Sarah Federman, and Madison Flaherty.
