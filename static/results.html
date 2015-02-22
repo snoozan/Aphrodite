@@ -15,10 +15,16 @@
   </div>
   <script id="entry-template" type="text/x-handlebars-template">
       <h2>Search Results</h2>
-
+      {{#each results}}
       <article class="card planned-p">
-        <h3 class="card__title">Planned Parenthood</h3>
-        <div class="card__status"><span class="open">Open</span><br>5 miles</div>
+        <h3 class="card__title">{{name}}</h3>
+        <div class="card__status">
+          {{#if opening_hours.open_now}}
+            <span class="open">Open</span>
+            {{else}}
+              <span class="closed">Closed</span>
+          {{/if}}
+        </div>
         <hr>
         <div class="card__content">
           <h4 class="card__content__title">Address</h4>
@@ -39,7 +45,7 @@
           </aside>
         </div>
       </article>
-
+      {{/each}}
   </script><!--end template-->
 
   <script src="js/handlebars.js"></script>
