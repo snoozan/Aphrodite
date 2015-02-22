@@ -1,13 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DeriveDataTypeable #-}
-module Main(main) where 
 
 -- Main function
+import Web.Scotty
 import Control.Monad(liftM,liftM2,when)
 import Control.Monad.IO.Class(liftIO)
 import qualified Data.ByteString.Lazy.Char8 as C
 import qualified Data.Text.Lazy as T
 import Network.HTTP.Types.Status(forbidden403, notFound404)
+import Network.Wai.Middleware.Static
 import Network.HTTP.Base
 import Text.Regex
 import Text.JSON.Generic
@@ -63,7 +64,7 @@ getClinicInfo placeid = do result <- simpleHttp $ placeUrl placeid
     
 
 -- Main loop
-mainloop :: IO()
+mainloop :: IO ()
 mainloop = scotty 3000 $ do
         middleware $ staticPolicy (noDots >-> addBase "static")
         get "/" $ file "static/index.html" 
@@ -77,7 +78,7 @@ mainloop = scotty 3000 $ do
            raw clinicDetails
 
 -- Entry Point
-main :: IO()
+main :: IO ()
 main = do 
     mainloop
 
