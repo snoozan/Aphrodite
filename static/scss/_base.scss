@@ -12,11 +12,19 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #555;
 }
+
 .home {
   background-image: url('img/ocean.jpg');
   background-size: cover;
   background-position: left bottom;
   background-repeat: no-repeat;
+}
+
+.results {
+  background-color: darken(#FFF, 4%);
+  .container {
+    margin-top: rem(80);
+  }
 }
 
 h1, h2, h3 {
@@ -31,8 +39,13 @@ h2 {
   font-size: rem(20);
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   @include outer-container;
+  width: 85%;
 }
 
 .center {
@@ -43,6 +56,10 @@ h2 {
   margin-top: rem(100);
 }
 
-.light-text {
-  color: #FFF;
+.open {
+  color: darken($green, 10%);
+}
+
+.closed {
+  color: $pink;
 }
