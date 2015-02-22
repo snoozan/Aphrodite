@@ -1,0 +1,13 @@
+.top-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: rem(40);
+  background-color: $peach;
+  width: 100%;
+  padding: rem(8);
+  a {
+    color: #FFF;
+    font-weight: 100;
+  }
+}

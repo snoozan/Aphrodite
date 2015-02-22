@@ -1,0 +1,10 @@
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  height: rem(200);
+  padding: rem(15);
+  box-shadow: 0 1px 3px rgba(0,0,0, .3);
+  &__title {
+    @include span-columns(8);
+  }
+}

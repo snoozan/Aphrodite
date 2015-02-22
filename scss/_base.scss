@@ -12,6 +12,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #555;
 }
+
 .home {
   background-image: url('img/ocean.jpg');
   background-size: cover;
@@ -33,6 +34,7 @@ h2 {
 
 .container {
   @include outer-container;
+  width: 85%;
 }
 
 .center {
@@ -45,4 +47,8 @@ h2 {
 
 .light-text {
   color: #FFF;
+}
+
+a {
+  text-decoration: none;
 }
