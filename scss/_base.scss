@@ -20,6 +20,13 @@ body {
   background-repeat: no-repeat;
 }
 
+.results {
+  background-color: darken(#FFF, 4%);
+  .container {
+    margin-top: rem(80);
+  }
+}
+
 h1, h2, h3 {
   font-weight: 300;
 }
@@ -30,6 +37,10 @@ h1 {
 
 h2 {
   font-size: rem(20);
+}
+
+a {
+  text-decoration: none;
 }
 
 .container {
@@ -45,10 +56,10 @@ h2 {
   margin-top: rem(100);
 }
 
-.light-text {
-  color: #FFF;
+.open {
+  color: darken($green, 10%);
 }
 
-a {
-  text-decoration: none;
+.closed {
+  color: $pink;
 }
