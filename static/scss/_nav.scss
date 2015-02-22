@@ -6,9 +6,31 @@
   background-color: $peach;
   width: 100%;
   padding: rem(13);
+  text-align: center;
+  z-index: 100;
+  &__title {
+    position: absolute;
+    top: rem(6);
+    color: #FFF;
+    left: 50%;
+    font-size: rem(24);
+    font-weight: 300;
+    transform: translateX(-50%);
+  }
   a {
     color: #FFF;
     font-weight: 100;
+    height: rem(23);
   }
 }
- 
+
+.left {
+  float: left;
+  position: relative;
+}
+
+.back-arrow {
+  float: left;
+  height: rem(23);
+  margin-right: rem(5);
+}
