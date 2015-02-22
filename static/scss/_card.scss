@@ -5,7 +5,7 @@
   height: auto;
   overflow: hidden;
   padding: rem(25);
-  padding-top: rem(20);
+  padding-top: rem(12);
   padding-bottom: rem(15);
   box-shadow: 0 1px 3px rgba(0,0,0, .3);
   position: relative;
@@ -90,7 +90,7 @@
       font-weight: 400;
     }
   }
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 700px) {
     width: 46%;
     float: left;
     &:nth-of-type(2n) {
@@ -101,9 +101,9 @@
 
 // CATEGORIES
 .planned-p {
-  border-left: 3px solid $pink;
+  border-left: 3px solid $teal-dark;
 }
 
 .hospital {
-  border-left: 3px solid $teal-dark;
+  border-left: 3px solid $pink;
 }
