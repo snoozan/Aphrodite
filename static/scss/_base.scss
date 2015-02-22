@@ -37,6 +37,14 @@ body {
     display: inline-block;
     width: 70%;
   }
+  .query {
+    font-style:italic;
+    color: lighten(#555, 30%);
+    max-width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 h1, h2, h3 {

@@ -14,11 +14,13 @@
 
   </div>
   <script id="entry-template" type="text/x-handlebars-template">
-      <h1>Search Results</h1>
+    <div>
+      <h1>Search Results: <span class="query">{{query}}</span></h1>
       <ul class="view-nav">
         <li><img src="img/grid.svg"></li>
         <li><img src="img/map.svg"></li>
       </ul>
+    </div>
       {{#each results}}
       <article class="card planned-p">
         <h3 class="card__title">{{name}}</h3>

@@ -17,10 +17,9 @@
           function () {
               params[decode(arguments[1])] = decode(arguments[2]);
           });
-
       return params;
     },
-    "getData": function() {   // AJAX our API to get the data
+    "getData": function(params) {   // AJAX our API to get the data
       var request = new XMLHttpRequest();
       var url = "";
 
@@ -152,6 +151,7 @@
        ],
        "status" : "OK"
       };
+      data.query = params;
       return data;
     },
     "render": function(data) {
@@ -160,11 +160,11 @@
       this.container.innerHTML = result;
     },
     "init": function() {
-      // Get the params
-      var params = this.getParams();
+      // Get the location query
+      var location = this.getParams().location;
 
       // Get the data
-      var data = this.getData();
+      var data = this.getData(location);
 
       // Render the template
       this.render(data);
