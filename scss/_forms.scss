@@ -20,8 +20,9 @@ input, form, textarea, button {
     font-weight: 100;
   }
   input[type="text"] {
-    box-shadow: 0 0 4px darken(#FFF, 20%);
+    //box-shadow: 0 0 4px darken(#FFF, 20%);
     color: lighten(#000, 40%);
+    background-color: rgba(255,255,255,.6);
     &::-webkit-input-placeholder {
       color: lighten(#000, 40%);
     }
@@ -50,7 +51,7 @@ input[type="text"] {
 
 button[type="submit"] {
   background-color: $peach;
-  border-radius: rem(4);
+  border-radius: rem(3);
   padding: rem(10);
   color: #FFF;
   border: none;
