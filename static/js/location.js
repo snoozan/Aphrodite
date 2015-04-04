@@ -1,1 +1,17 @@
-var locationForm=function(o,t){t.addEventListener("click",function(){navigator.geolocation.getCurrentPosition(function(t){var n=t.coords.latitude.toString()+" "+t.coords.longitude.toString();o.value=n,console.log(t)})})};window.addEventListener("DOMContentLoaded",function(){var o=document.querySelector(".location-box"),t=document.querySelector(".location-trigger");locationForm(o,t)});
+var locationForm = function(input, trigger) {
+  trigger.addEventListener("click", function() {
+   navigator.geolocation.getCurrentPosition(function(position) {
+     var str = position.coords.latitude.toString() + " " + position.coords.longitude.toString();
+     input.value = str;
+     console.log(position);
+   });
+  });
+};
+
+window.addEventListener("DOMContentLoaded", function() {
+  // init location form
+  var input = document.querySelector('.location-box'),
+   trigger = document.querySelector('.location-trigger');
+
+  locationForm(input, trigger);
+});
