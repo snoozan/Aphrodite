@@ -68,7 +68,7 @@ mainloop :: IO ()
 mainloop = scotty 3000 $ do
         middleware $ staticPolicy (noDots >-> addBase "static")
         get "/" $ file "static/index.html" 
-        get "/clinics" $ do
+        get "/clinics/:location" $ do
            location <- param "location"             
            clinics <- liftIO $ getNearbyClinics location
            raw clinics

@@ -11,3 +11,4 @@ cabal.sandbox.config
 cabal.config
 .sass-cache/
 config.codekit
+node

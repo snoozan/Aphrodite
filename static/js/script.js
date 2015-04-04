@@ -21,11 +21,12 @@
     },
     "getData": function(params) {   // AJAX our API to get the data
       var request = new XMLHttpRequest();
-      var url = "Aphrodite/clinics?location=" + params;
+      var url = "clinics/" + params;
 
+      var data;
       request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
-            var data = JSON.parse(xmlhttp.responseText);
+            data = JSON.parse(request.responseText);
         }
         // else if (request.status == 00) {
           // add error handling later you lazy mofo
@@ -34,7 +35,7 @@
       request.open("GET", url, true);
       request.send();
       
-      data.query = params;
+      //data.query = params;
       return data;
     },
     "render": function(data) {
