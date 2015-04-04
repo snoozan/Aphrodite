@@ -21,7 +21,6 @@
     },
     "getData": function(params) {   // AJAX our API to get the data
       var request = new XMLHttpRequest();
-      var url = "clinics/" + params;
 
       var data;
       request.onreadystatechange = function() {

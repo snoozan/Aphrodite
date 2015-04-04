@@ -64,15 +64,19 @@ getClinicInfo placeid = do result <- simpleHttp $ placeUrl placeid
     
 
 -- Main loop
-mainloop :: IO () 
+mainloop :: IO ()
 mainloop = scotty 3000 $ do
         middleware $ staticPolicy (noDots >-> addBase "static")
         get "/" $ file "static/index.html" 
+<<<<<<< HEAD
         get "/clinics/:location" $ do
+=======
+        post "/clinics" $ do
+>>>>>>> parent of e06d8e6... updated script.js
            location <- param "location"             
            clinics <- liftIO $ getNearbyClinics location
            raw clinics
-        get "/getDetails" $ do
+        post "/getDetails" $ do
            placeid <- param "placeid"
            clinicDetails <- liftIO $ getClinicInfo placeid
            raw clinicDetails
