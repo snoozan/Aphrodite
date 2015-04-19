@@ -31,3 +31,4 @@ executable aphrodite
                      , regex-compat
                      , json
                      , http-conduit
+                     , blaze-html

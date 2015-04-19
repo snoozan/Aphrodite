@@ -17,6 +17,8 @@ import Control.Monad.IO.Class
 import qualified Maps as M
 import qualified Places as P
 
+import Template
+
 --import Api
 
 googleApiKey :: String
@@ -67,7 +69,7 @@ getClinicInfo placeid = do result <- simpleHttp $ placeUrl placeid
 mainloop :: IO ()
 mainloop = scotty 3000 $ do
         middleware $ staticPolicy (noDots >-> addBase "static")
-        get "/" $ file "static/index.html" 
+        get "/" (html renderIndex)
         get "/clinics/:location" $ do
            location <- param "location"             
            clinics <- liftIO $ getNearbyClinics location
