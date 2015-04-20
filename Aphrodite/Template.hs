@@ -55,5 +55,6 @@ renderResults json = renderHtml [shamlet|$newline always
                         <ul>
                             <li>Mon: 8 am - 4 pm
                             <li>Tues: 8 am - 4 pm
+            <p> #{json}
 
     |]

@@ -19,3 +19,14 @@ data Geolocjson = Geolocjson
 data Geolocresult = Geolocresult
     { results :: [Geolocjson]
     } deriving(Show,Data,Typeable)
+
+data NearbyResultLoc = NearbyResultLoc
+    { results :: [Geolocgeometry]
+    } deriving(Show,Data,Typeable)
+
+data NearbyResultPhotos = NearbyResultPhotos
+    { height :: Integer
+    , photo_reference :: String
+    , width :: Integer
+    } deriving(Show,Data,Typeable)
+
