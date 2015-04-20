@@ -17,10 +17,12 @@ import Control.Monad.IO.Class
 import qualified Maps as M
 import qualified Places as P
 
+import Template
+
 --import Api
 
 googleApiKey :: String
-googleApiKey = "AIzaSyDxQZG6uDB3BWSXmMGdmto8mJqN-P5Zg-Q"
+googleApiKey = ""
 
 nearbyUrl :: String -> String
 nearbyUrl location = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
@@ -85,15 +87,17 @@ getRouteFromStr (Just [lat1,lng1]) (Just [lat2,lng2]) = do
 
 
 -- Main loop
-mainloop :: IO () 
+mainloop :: IO ()
 mainloop = scotty 3000 $ do
         middleware $ staticPolicy (noDots >-> addBase "static")
-        get "/" $ file "static/index.html" 
-        get "/clinics" $ do
+        get "/" (html renderIndex)
+        get "/clinics/" $ do
            location <- param "location"             
+           liftIO $ putStrLn ("The location param is: " ++ show location)
            clinics <- liftIO $ getNearbyClinics location
-           raw clinics
-        get "/getDetails" $ do
+           liftIO $ putStrLn ("clinics information is: " ++ show clinics)
+           html $ renderResults $ encodeJSON clinics
+        post "/getDetails" $ do
            placeid <- param "placeid"
            clinicDetails <- liftIO $ getClinicInfo placeid
            raw clinicDetails
