@@ -22,7 +22,7 @@ import Template
 --import Api
 
 googleApiKey :: String
-googleApiKey = "AIzaSyC_NRnHgEfG2MdB9l3i5RmgMykdxS9GET4"
+googleApiKey = ""
 
 nearbyUrl :: String -> String
 nearbyUrl location = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
