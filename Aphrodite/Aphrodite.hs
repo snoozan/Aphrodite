@@ -22,7 +22,7 @@ import Template
 --import Api
 
 googleApiKey :: String
-googleApiKey = ""
+googleApiKey = "AIzaSyC_NRnHgEfG2MdB9l3i5RmgMykdxS9GET4"
 
 nearbyUrl :: String -> String
 nearbyUrl location = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
@@ -64,16 +64,17 @@ getClinicInfo placeid = do result <- simpleHttp $ placeUrl placeid
                            --    days = encodeJSON pers
                            return result
     
-
 -- Main loop
 mainloop :: IO ()
 mainloop = scotty 3000 $ do
         middleware $ staticPolicy (noDots >-> addBase "static")
         get "/" (html renderIndex)
-        get "/clinics/:location" $ do
+        get "/clinics/" $ do
            location <- param "location"             
+           liftIO $ putStrLn ("The location param is: " ++ show location)
            clinics <- liftIO $ getNearbyClinics location
-           raw clinics
+           liftIO $ putStrLn ("clinics information is: " ++ show clinics)
+           html $ renderResults $ encodeJSON clinics
         post "/getDetails" $ do
            placeid <- param "placeid"
            clinicDetails <- liftIO $ getClinicInfo placeid
