@@ -11,18 +11,19 @@ import Network.HTTP.Types.Status(forbidden403, notFound404)
 import Network.Wai.Middleware.Static
 import Network.HTTP.Base
 import Text.Regex
-import Text.JSON.Generic
+import Data.Aeson
 import Network.HTTP.Conduit
 import Control.Monad.IO.Class
 import qualified Maps as M
 import qualified Places as P
+import qualified Nearby as N
 
 import Template
 
 --import Api
 
 googleApiKey :: String
-googleApiKey = "AIzaSyC_NRnHgEfG2MdB9l3i5RmgMykdxS9GET4"
+googleApiKey = ""
 
 nearbyUrl :: String -> String
 nearbyUrl location = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
@@ -45,13 +46,11 @@ getNearbyClinics loc =
     case getGPSCoor loc of
         Just [slat,slong] -> simpleHttp $ nearbyUrl $ slat ++ "," ++ slong
         Nothing           -> do res <- simpleHttp $ getLocation loc
-                                let geoloc = decodeJSON $ C.unpack res
-                                    M.Geolocresult jsn = geoloc
-                                    M.Geolocjson (M.Geolocgeometry (M.Geolocloc lat lng)) = head jsn
-                                simpleHttp $ nearbyUrl $ show lat ++ "," ++ show lng
-
-
-
+                                case decode (res) of
+                                    Just (M.Geolocresult jsn) ->
+                                        let (M.Geolocjson (M.Geolocgeometry (M.Geolocloc lat lng))) = head jsn
+                                        in simpleHttp $ nearbyUrl $ show lat ++ "," ++ show lng
+                                    Nothing -> return "Shit broke man"
 
 placeUrl :: String -> String
 placeUrl place = "https://maps.googleapis.com/maps/api/place/details/json?"
@@ -70,6 +69,7 @@ getClinicInfo placeid = do result <- simpleHttp $ placeUrl placeid
                            --        } = dets
                            --    days = encodeJSON pers
                            return result
+
 directionsUrl :: String -> String -> String
 directionsUrl orig dest = "https://maps.googleapis.com/maps/api/directions/json?"
                         ++ "Directions"
@@ -104,8 +104,6 @@ mainloop = scotty 3000 $ do
            end <- param "end"
            route <- liftIO (getRouteFromStr (getGPSCoor start) (getGPSCoor end))
            raw route
-
-
 
 -- Entry Point
 main :: IO ()

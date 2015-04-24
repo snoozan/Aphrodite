@@ -5,6 +5,7 @@ import Text.Blaze.Html.Renderer.Text ( renderHtml )
 import Text.Hamlet                   ( shamlet )
 import Data.Text.Lazy                ( Text )
 import qualified Data.ByteString.Lazy.Char8 as C
+import qualified Nearby as N
 
 renderIndex :: Text
 renderIndex = renderHtml [shamlet|$newline always
