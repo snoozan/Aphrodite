@@ -11,16 +11,19 @@ import Network.HTTP.Types.Status(forbidden403, notFound404)
 import Network.Wai.Middleware.Static
 import Network.HTTP.Base
 import Text.Regex
-import Text.JSON.Generic
+import Data.Aeson
 import Network.HTTP.Conduit
 import Control.Monad.IO.Class
 import qualified Maps as M
 import qualified Places as P
+import qualified Nearby as N
+
+import Template
 
 --import Api
 
 googleApiKey :: String
-googleApiKey = "AIzaSyDxQZG6uDB3BWSXmMGdmto8mJqN-P5Zg-Q"
+googleApiKey = ""
 
 nearbyUrl :: String -> String
 nearbyUrl location = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
@@ -45,13 +48,11 @@ getNearbyClinics loc =
     case getGPSCoor loc of
         Just [slat,slong] -> simpleHttp $ nearbyUrl $ slat ++ "," ++ slong
         Nothing           -> do res <- simpleHttp $ getLocation loc
-                                let geoloc = decodeJSON $ C.unpack res
-                                    M.Geolocresult jsn = geoloc
-                                    M.Geolocjson (M.Geolocgeometry (M.Geolocloc lat lng)) = head jsn
-                                simpleHttp $ nearbyUrl $ show lat ++ "," ++ show lng
-
-
-
+                                case decode (res) of
+                                    Just (M.Geolocresult jsn) ->
+                                        let (M.Geolocjson (M.Geolocgeometry (M.Geolocloc lat lng))) = head jsn
+                                        in simpleHttp $ nearbyUrl $ show lat ++ "," ++ show lng
+                                    Nothing -> return "Shit broke man"
 
 placeUrl :: String -> String
 placeUrl place = "https://maps.googleapis.com/maps/api/place/details/json?"
@@ -70,6 +71,7 @@ getClinicInfo placeid = do result <- simpleHttp $ placeUrl placeid
                            --        } = dets
                            --    days = encodeJSON pers
                            return result
+
 directionsUrl :: String -> String -> String
 directionsUrl orig dest = "https://maps.googleapis.com/maps/api/directions/json?"
                         ++ "Directions"
@@ -87,15 +89,15 @@ getRouteFromStr (Just [lat1,lng1]) (Just [lat2,lng2]) = do
 
 
 -- Main loop
-mainloop :: IO () 
+mainloop :: IO ()
 mainloop = scotty 3000 $ do
         middleware $ staticPolicy (noDots >-> addBase "static")
-        get "/" $ file "static/index.html" 
-        get "/clinics" $ do
+        get "/" (html renderIndex)
+        get "/clinics/" $ do
            location <- param "location"             
            clinics <- liftIO $ getNearbyClinics location
-           raw clinics
-        get "/getDetails" $ do
+           html $ renderResults $ C.unpack clinics
+        post "/getDetails" $ do
            placeid <- param "placeid"
            clinicDetails <- liftIO $ getClinicInfo placeid
            raw clinicDetails
@@ -104,9 +106,6 @@ mainloop = scotty 3000 $ do
            end <- param "end"
            route <- liftIO (getRouteFromStr (getGPSCoor start) (getGPSCoor end))
            raw route
-           
-
-
 -- Entry Point
 main :: IO ()
 main = do 

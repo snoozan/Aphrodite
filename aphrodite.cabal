@@ -14,6 +14,7 @@ executable aphrodite
   hs-source-dirs:      Aphrodite
   -- other-modules:       
   build-depends:       base ==4.*
+                     , aeson
                      , wai
                      , warp
                      , http-types
@@ -31,3 +32,4 @@ executable aphrodite
                      , regex-compat
                      , json
                      , http-conduit
+                     , blaze-html
