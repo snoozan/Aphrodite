@@ -1,0 +1,20 @@
+<html>
+<head>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="map.js"></script>
+<script>
+$(document).ready(function() {
+	key = "AIzaSyBYnmRz4nsY9-RR6I5P2R0kn-VBzA9tUnc";
+	dst = '52.5,-0.127';
+	start = '51.5,-2.127';
+	$('#foo').html(buildIframe(start, dst, key));
+	start = '51.5,-10.127';	
+});
+</script>
+</head>
+<body>
+<div id = foo>
+</div>
+</body>
+</html>

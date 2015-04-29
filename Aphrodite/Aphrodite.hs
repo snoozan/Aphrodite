@@ -35,8 +35,10 @@ getLocation loc = "https://maps.googleapis.com/maps/api/geocode/json?"
                 ++ "&key" ++ googleApiKey
 
 getGPSCoor :: String -> Maybe [String]
-getGPSCoor reg = matchRegex (mkRegex "([0-9.-]+) ([0-9.-]+)") reg
-
+getGPSCoor reg = let x = matchRegex (mkRegex "([0-9.-]+) ([0-9.-]+)") reg
+                 in case x of 
+                    Just [slat, slong] -> x
+                    Nothing -> convertToGPS reg
 
 getNearbyClinics :: String -> IO C.ByteString
 getNearbyClinics loc =
@@ -102,7 +104,7 @@ mainloop = scotty 3000 $ do
            end <- param "end"
            route <- liftIO (getRouteFromStr (getGPSCoor start) (getGPSCoor end))
            raw route
-
+           
 
 
 -- Entry Point
