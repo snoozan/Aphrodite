@@ -31,10 +31,10 @@ renderIndex = renderHtml [shamlet|$newline always
 
 --todo: make sure the json you recieve is non-escaped json
 --iterate through and display cards
-renderResults :: C.ByteString -> Text
-renderResults json = let x = decode json :: Maybe N.NearbyResultLoc
-                         results = case x of (Just a) -> N.results a
-                                             _ -> error "Json could not be decoded"
+renderResults :: C.ByteString -> String -> Text
+renderResults json s_coor = let x = decode json :: Maybe N.NearbyResultLoc
+                                results = case x of (Just a) -> N.results a
+                                                    _ -> error "Json could not be decoded"
                      in renderHtml [shamlet|$newline always
     <html>
         <head>

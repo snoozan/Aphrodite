@@ -40,6 +40,12 @@ getLocation loc = "https://maps.googleapis.com/maps/api/geocode/json?"
 getGPSCoor :: String -> Maybe [String]
 getGPSCoor reg =  matchRegex (mkRegex "([0-9.-]+) ([0-9.-]+)") reg
 
+getGPSCoordinates :: String -> String
+getGPSCoordinates loc = 
+    case getGPSCoor loc of
+        Just [slat,slong] -> slat ++ "," ++ slong
+        Nothing           -> getGPSCoordinates $ getLocation loc 
+
 getNearbyClinics :: String -> IO C.ByteString
 getNearbyClinics loc =
     case getGPSCoor loc of
@@ -93,7 +99,7 @@ mainloop = scotty 3000 $ do
         get "/clinics/" $ do
            location <- param "location"             
            clinics <- liftIO $ getNearbyClinics location
-           html $ renderResults clinics
+           html $ renderResults clinics (getGPSCoordinates location)
         post "/getDetails" $ do
            placeid <- param "placeid"
            clinicDetails <- liftIO $ getClinicInfo placeid
