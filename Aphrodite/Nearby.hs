@@ -44,8 +44,6 @@ data NearbyResultJson = NearbyResultJson
     , icon :: String
     , id   :: String
     , name :: String
-    , opening_hours :: [NearbyResultOpen]
-    , photos :: [NearbyResultPhotos]
     , place_id :: String
     , reference :: String
     , vicinity :: String

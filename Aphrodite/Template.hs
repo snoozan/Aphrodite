@@ -6,6 +6,7 @@ import Text.Hamlet                   ( shamlet )
 import Data.Text.Lazy                ( Text )
 import qualified Data.ByteString.Lazy.Char8 as C
 import qualified Nearby as N
+import Data.Aeson
 
 renderIndex :: Text
 renderIndex = renderHtml [shamlet|$newline always
@@ -30,8 +31,11 @@ renderIndex = renderHtml [shamlet|$newline always
 
 --todo: make sure the json you recieve is non-escaped json
 --iterate through and display cards
-renderResults :: String -> Text
-renderResults json = renderHtml [shamlet|$newline always
+renderResults :: C.ByteString -> Text
+renderResults json = let x = decode json :: Maybe N.NearbyResultLoc
+                         results = case x of (Just a) -> N.results a
+                                             _ -> error "Json could not be decoded"
+                     in renderHtml [shamlet|$newline always
     <html>
         <head>
             <title>Search Results | Aphrodite
@@ -42,20 +46,21 @@ renderResults json = renderHtml [shamlet|$newline always
                 <a class="left" href="/"><img class="back-arrow" src="/img/arrow-left.svg">Back
 
                 <span class="top-bar__title">Aphrodite
+            $forall N.NearbyResultJson geometry icon id name place_id reference vicinity <- results
         
-            <div class="container">
-                <article class="card planned-p">
-                    <h3 class="card__title">Hello
-                    <div class="card__status">
-                        <span class="open">Open
-                    <hr>
-                    <div class="card__content first">
-                        <p>129 Clovercrest Dr.
-                            <br>Rochester, NY 14618
-                    <div class="card__content">
-                        <ul>
-                            <li>Mon: 8 am - 4 pm
-                            <li>Tues: 8 am - 4 pm
-            <p> #{json}
+                <div class="container">
+                    <article class="card planned-p">
+                        <h3 class="card__title">#{name}
+                        <div class="card__status">
+                            <span class="open">Open
+                        <hr>
+                        <div class="card__content first">
+                            <p>#{vicinity}
+                        <div class="card__content">
+                            <ul>
+                                <li>Mon: 8 am - 4 pm
+                                <li>Tues: 8 am - 4 pm
+                
+
 
     |]
