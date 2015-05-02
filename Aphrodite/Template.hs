@@ -33,9 +33,8 @@ renderIndex = renderHtml [shamlet|$newline always
 --iterate through and display cards
 renderResults :: C.ByteString -> Text
 renderResults json = let x = decode json :: Maybe N.NearbyResultLoc
-                         (y:res) = case x of (Just a) -> N.results a
+                         results = case x of (Just a) -> N.results a
                                              _ -> error "Json could not be decoded"
-                         z = N.name y
                      in renderHtml [shamlet|$newline always
     <html>
         <head>
@@ -47,21 +46,21 @@ renderResults json = let x = decode json :: Maybe N.NearbyResultLoc
                 <a class="left" href="/"><img class="back-arrow" src="/img/arrow-left.svg">Back
 
                 <span class="top-bar__title">Aphrodite
+            $forall N.NearbyResultJson geometry icon id name place_id reference vicinity <- results
         
-            <div class="container">
-                <article class="card planned-p">
-                    <h3 class="card__title">Hello
-                    <div class="card__status">
-                        <span class="open">Open
-                    <hr>
-                    <div class="card__content first">
-                        <p>129 Clovercrest Dr.
-                            <br>Rochester, NY 14618
-                    <div class="card__content">
-                        <ul>
-                            <li>Mon: 8 am - 4 pm
-                            <li>Tues: 8 am - 4 pm
-            <p> #{z}
+                <div class="container">
+                    <article class="card planned-p">
+                        <h3 class="card__title">#{name}
+                        <div class="card__status">
+                            <span class="open">Open
+                        <hr>
+                        <div class="card__content first">
+                            <p>#{vicinity}
+                        <div class="card__content">
+                            <ul>
+                                <li>Mon: 8 am - 4 pm
+                                <li>Tues: 8 am - 4 pm
+                
 
 
     |]
