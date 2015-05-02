@@ -93,7 +93,7 @@ mainloop = scotty 3000 $ do
         get "/clinics/" $ do
            location <- param "location"             
            clinics <- liftIO $ getNearbyClinics location
-           html $ renderResults $ C.unpack clinics
+           html $ renderResults clinics
         post "/getDetails" $ do
            placeid <- param "placeid"
            clinicDetails <- liftIO $ getClinicInfo placeid

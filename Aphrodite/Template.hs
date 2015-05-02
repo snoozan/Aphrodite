@@ -6,6 +6,7 @@ import Text.Hamlet                   ( shamlet )
 import Data.Text.Lazy                ( Text )
 import qualified Data.ByteString.Lazy.Char8 as C
 import qualified Nearby as N
+import Data.Aeson
 
 renderIndex :: Text
 renderIndex = renderHtml [shamlet|$newline always
@@ -30,8 +31,12 @@ renderIndex = renderHtml [shamlet|$newline always
 
 --todo: make sure the json you recieve is non-escaped json
 --iterate through and display cards
-renderResults :: String -> Text
-renderResults json = renderHtml [shamlet|$newline always
+renderResults :: C.ByteString -> Text
+renderResults json = let x = decode json :: Maybe N.NearbyResultLoc
+                         (y:res) = case x of (Just a) -> N.results a
+                                             _ -> error "Json could not be decoded"
+                         z = N.name y
+                     in renderHtml [shamlet|$newline always
     <html>
         <head>
             <title>Search Results | Aphrodite
@@ -56,6 +61,7 @@ renderResults json = renderHtml [shamlet|$newline always
                         <ul>
                             <li>Mon: 8 am - 4 pm
                             <li>Tues: 8 am - 4 pm
-            <p> #{json}
+            <p> #{z}
+
 
     |]
