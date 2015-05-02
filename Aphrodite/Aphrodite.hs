@@ -23,7 +23,7 @@ import Template
 --import Api
 
 googleApiKey :: String
-googleApiKey = ""
+googleApiKey = "AIzaSyBYnmRz4nsY9-RR6I5P2R0kn-VBzA9tUnc"
 
 nearbyUrl :: String -> String
 nearbyUrl location = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
@@ -38,10 +38,7 @@ getLocation loc = "https://maps.googleapis.com/maps/api/geocode/json?"
                 ++ "&key" ++ googleApiKey
 
 getGPSCoor :: String -> Maybe [String]
-getGPSCoor reg = let x = matchRegex (mkRegex "([0-9.-]+) ([0-9.-]+)") reg
-                 in case x of 
-                    Just [slat, slong] -> x
-                    Nothing -> convertToGPS reg
+getGPSCoor reg =  matchRegex (mkRegex "([0-9.-]+) ([0-9.-]+)") reg
 
 getNearbyClinics :: String -> IO C.ByteString
 getNearbyClinics loc =
