@@ -1,5 +1,10 @@
 module PathApi where
 
+import Data.Aeson
+import Data.Text
+import Control.Applicative
+import Control.Monad
+import GHC.Generics 
 
 directionsUrl :: String -> String -> IO C.ByteString
 directionsUrl orig dest = "https://maps.googleapis.com/maps/api/directions/json?"
@@ -23,11 +28,6 @@ getRouteFromStr (Just [lat1,lng1]) (Just [lat2,lng2]) = do res <- simpleHttp $ d
 	where geoStr1 = lat1 ++ "," ++ lng1
 	      geoStr2 = lat2 ++ "," ++ lng2
 
--- | only returns a single route
---getRoute :: M.Geolocloc -> M.Geolocloc -> IO C.ByteString
---getRoute (Geolocloc lat1 lng1) (geolocloc lat2 lng2) = 
---		do res <- simpleHttp $ directionsURL geoStr1 geoStr2
---		where geoStr1 = show lat1 ++ "," ++ show lng1
---			geoStr2 = show lat2 ++ "," ++ show lng2
+
 
 

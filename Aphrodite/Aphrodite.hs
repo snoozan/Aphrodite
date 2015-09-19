@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE TemplateHaskell, QuasiQuotes #-}
 
 -- Main function
 import Web.Scotty
@@ -23,7 +24,7 @@ import Template
 --import Api
 
 googleApiKey :: String
-googleApiKey = "AIzaSyBYnmRz4nsY9-RR6I5P2R0kn-VBzA9tUnc"
+googleApiKey = ""
 
 nearbyUrl :: String -> String
 nearbyUrl location = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
@@ -68,6 +69,7 @@ getClinicInfo placeid = do result <- simpleHttp $ placeUrl placeid
                            --        } = dets
                            --    days = encodeJSON pers
                            return result
+
 
 directionsUrl :: String -> String -> String
 directionsUrl orig dest = "https://maps.googleapis.com/maps/api/directions/json?"

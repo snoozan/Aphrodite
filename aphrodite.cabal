@@ -22,7 +22,7 @@ executable aphrodite
                      , scotty
                      , text
                      , bytestring
-                     , shakespeare
+                     , yesod
                      , memcached
                      , transformers
                      , wai-middleware-static

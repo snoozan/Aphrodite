@@ -1,4 +1,4 @@
-{-# LANGUAGE TemplateHaskell, QuasiQuotes #-}
+{-# LANGUAGE OverloadedStrings, TemplateHaskell, TypeFamilies, QuasiQuotes #-}
 module Template where
 
 import Text.Blaze.Html.Renderer.Text ( renderHtml )
@@ -29,6 +29,7 @@ renderIndex = renderHtml [shamlet|$newline always
 
     |]
 
+
 --todo: make sure the json you recieve is non-escaped json
 --iterate through and display cards
 renderResults :: C.ByteString -> Text
@@ -46,21 +47,34 @@ renderResults json = let x = decode json :: Maybe N.NearbyResultLoc
                 <a class="left" href="/"><img class="back-arrow" src="/img/arrow-left.svg">Back
 
                 <span class="top-bar__title">Aphrodite
-            $forall N.NearbyResultJson geometry icon id name place_id reference vicinity <- results
+            <div class="container">
+                $forall N.NearbyResultJson geometry icon id name place_id reference vicinity <- results
         
-                <div class="container">
-                    <article class="card planned-p">
-                        <h3 class="card__title">#{name}
-                        <div class="card__status">
-                            <span class="open">Open
-                        <hr>
-                        <div class="card__content first">
-                            <p>#{vicinity}
-                        <div class="card__content">
-                            <ul>
-                                <li>Mon: 8 am - 4 pm
-                                <li>Tues: 8 am - 4 pm
-                
-
+                    <a href="/getDirections?start=#{place_id}&end=#{vicinity}">
+                        
+                        <article class="card planned-p">
+                            <h3 class="card__title">#{name}
+                            <div class="card__status">
+                                <span class="open">Open
+                            <hr>
+                            <div class="card__content first">
+                                <p>#{vicinity}
+                            <div class="card__content">
+                                <ul>
+                                    <li>Mon: 8 am - 4 pm
+                                    <li>Tues: 8 am - 4 pm
+                    
 
     |]
+
+clickableWidget = do 
+                toWidget [julius|
+clickable :: C.Bytestring -> IO ()
+clickable json = let x = decode json :: Maybe P.PlacesResults
+                    results = case x of (Just a) -> P.results a
+                                        _ -> error "Json could not be decoded"
+                 in renderJs [shamlet|$newline always
+                         |] 
+
+--- insert julius here (maybe using widgets)??
+
